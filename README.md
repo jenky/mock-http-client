@@ -59,20 +59,20 @@ If you discover any security related issues, please email :author_email instead 
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/:vendor/:package_name.svg?style=for-the-badge
+[ico-version]: https://img.shields.io/packagist/v/:vendor_slug/:package_name.svg?style=for-the-badge
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=for-the-badge
-[ico-travis]: https://img.shields.io/travis/:vendor/:package_name/master.svg?style=for-the-badge
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/:vendor/:package_name.svg?style=for-the-badge
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/:vendor/:package_name.svg?style=for-the-badge
-[ico-gh-actions]: https://img.shields.io/github/workflow/status/:vendor/:package_name/Tests?label=actions&logo=github&style=for-the-badge
-[ico-codecov]: https://img.shields.io/codecov/c/github/:vendor/:package_name?logo=codecov&style=for-the-badge
-[ico-downloads]: https://img.shields.io/packagist/dt/:vendor/:package_name.svg?style=for-the-badge
+[ico-travis]: https://img.shields.io/travis/:vendor_slug/:package_name/master.svg?style=for-the-badge
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/:vendor_slug/:package_name.svg?style=for-the-badge
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/:vendor_slug/:package_name.svg?style=for-the-badge
+[ico-gh-actions]: https://img.shields.io/github/workflow/status/:vendor_slug/:package_name/Tests?label=actions&logo=github&style=for-the-badge
+[ico-codecov]: https://img.shields.io/codecov/c/github/:vendor_slug/:package_name?logo=codecov&style=for-the-badge
+[ico-downloads]: https://img.shields.io/packagist/dt/:vendor_slug/:package_name.svg?style=for-the-badge
 
-[link-packagist]: https://packagist.org/packages/:vendor/:package_name
-[link-travis]: https://travis-ci.org/:vendor/:package_name
-[link-scrutinizer]: https://scrutinizer-ci.com/g/:vendor/:package_name/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/:vendor/:package_name
-[link-gh-actions]: https://github.com/jenky/:vendor/:package_name
-[link-codecov]: https://codecov.io/gh/:vendor/:package_name
-[link-downloads]: https://packagist.org/packages/:vendor/:package_name
+[link-packagist]: https://packagist.org/packages/:vendor_slug/:package_name
+[link-travis]: https://travis-ci.org/:vendor_slug/:package_name
+[link-scrutinizer]: https://scrutinizer-ci.com/g/:vendor_slug/:package_name/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/:vendor_slug/:package_name
+[link-gh-actions]: https://github.com/jenky/:vendor_slug/:package_name
+[link-codecov]: https://codecov.io/gh/:vendor_slug/:package_name
+[link-downloads]: https://packagist.org/packages/:vendor_slug/:package_name
 
