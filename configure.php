@@ -182,7 +182,7 @@ foreach ($files as $file) {
     replace_in_file($file, [
         ':author_name' => $authorName,
         ':author_username' => $authorUsername,
-        'author@domain.com' => $authorEmail,
+        ':author_email' => $authorEmail,
         ':vendor_name' => $vendorName,
         ':vendor_slug' => $vendorSlug,
         'VendorName' => $vendorNamespace,
