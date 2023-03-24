@@ -50,7 +50,7 @@ MockResponse::create(['name' => 'John', 'age' => 30], 201, ['X-Custom-Header' =>
 
 > You don't have to add `['Content-Type' => 'application/json']` header if your body is array.
 
-If you have fixture data and don't want to create response manually, you can also use `fixture` method to create a response
+If you have fixture data and don't want to create response manually, you can also use `fixture` method to create a response.
 
 ```php
 use Jenky\Atlas\Mock\MockResponse;
