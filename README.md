@@ -1,4 +1,4 @@
-# PSR-18 Mock HTTP Client
+# Atlas Mock HTTP Client
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Github Actions][ico-gh-actions]][link-gh-actions]
@@ -6,7 +6,9 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 [![Software License][ico-license]](LICENSE.md)
 
-This is where your description should go. Try and limit it to a paragraph or two. Consider adding a small example.
+Atlas mock HTTP client is [PSR-18 Client](https://www.php-fig.org/psr/psr-18/) implementation that provides ability send test requests with fake responses.
+
+The `MockClient` accepts `Psr\Http\Message\ResponseInterface` which when used on a request, will respond with a fake response without actually sending a real request to the web. This helps speed up tests massively and can help you test your application for different API response scenarios, like a 404 error or 500 error.
 
 ## Installation
 
@@ -18,11 +20,133 @@ composer require jenky/atlas-mock-client
 
 ## Usage
 
+### Creating Mock Client
+
 ```php
 use Jenky\Atlas\Mock\MockClient;
 
 $client = new MockClient();
 $response = $client->sendRequest($request);
+```
+
+By default `MockClient` will always return `200 - OK` status code with empty body. If you want to return a different response, create a `Psr\Http\Message\ResponseInterface` instance and pass it as constructor argument. You can use `MockResponse` to quickly create a fake response.
+
+```php
+use Jenky\Atlas\Mock\MockClient;
+use Jenky\Atlas\Mock\MockResponse;
+
+$client = new MockClient(MockResponse::create('', 500));
+```
+
+### Faking Response
+
+The `MockResponse` class is used to create fake responses. It can accept a body, status, and headers. These properties will be populated in the fake response. The response body accepts an array for a JSON body or plain strings to simulate other responses, like XML.
+
+```php
+use Jenky\Atlas\Mock\MockResponse;
+
+MockResponse::create(['name' => 'John', 'age' => 30], 201, ['X-Custom-Header' => 'foo']);
+```
+
+> You don't have to add `['Content-Type' => 'application/json']` header if your body is array.
+
+If you have fixture data and don't want to create response manually, you can also use `fixture` method to create a response
+
+```php
+use Jenky\Atlas\Mock\MockResponse;
+
+MockResponse::fixture(__DIR__.'/fixtures/user.json', 200, ['Content-Type' => 'application/json']);
+```
+
+#### Faking Response Sequences
+
+Sequence faking allows you to define a number of fake responses in a specific order. It will pull out the next response in the sequence, removing it from the sequence. Each response can only be consumed once. When all the responses in a response sequence have been consumed, any further requests will cause the response sequence to throw an exception.
+
+```php
+use Jenky\Atlas\Mock\MockClient;
+use Jenky\Atlas\Mock\MockResponse;
+
+$client = new MockClient([
+    MockResponse::make(['name' => 'foo'], 200),
+    MockResponse::make(['name' => 'bar'], 201),
+    MockResponse::make(['error' => 'Server Error'], 500),
+]);
+
+$client->sendRequest($firstRequest); // Will return with `['name' => 'foo']` and status `200`
+$client->sendRequest($secondRequest); // Will return with `['name' => 'bar']` and status `200`
+$client->sendRequest($thirdRequest); // Will return with `['error' => 'Server Error']` and status `500`
+```
+### Faking Specific URLs
+
+Alternatively, you may use `ScopingMockClient` and pass an array to the constructor argument. The array's keys should represent URL patterns that you wish to fake and their associated responses. The `*` character may be used as a wildcard character. Any requests made to URLs that have not been faked will actually be executed.
+
+
+```php
+use Jenky\Atlas\Mock\MockResponse;
+use Jenky\Atlas\Mock\ScopingMockClient;
+
+new ScopingMockClient([
+    // Stub a JSON response for GitHub endpoints...
+    'github.com/*' => MockResponse::create(['foo' => 'bar'], 200),
+
+    // Stub a string response for Google endpoints...
+    'google.com/*' => MockResponse::create('Hello World', 200, $headers),
+
+    // Stub a string response for all other endpoints...
+    '*' => MockResponse::create('Hello World', 200, $headers),
+]);
+```
+
+[Sequence Faking](#faking-response-sequences) also works with `ScopingMockClient`
+
+```php
+use Jenky\Atlas\Mock\MockResponse;
+use Jenky\Atlas\Mock\ScopingMockClient;
+
+new ScopingMockClient([
+    // Stub sequence JSON responses for GitHub endpoints...
+    'github.com/*' => [
+        MockResponse::create(['foo' => 'bar']),
+        MockResponse::create(['error' => 'Server Error'], 500),
+    ],
+
+    // Stub sequence responses for Google endpoints...
+    'google.com/*' => [
+        MockResponse::create('Hello World', 200, $headers),
+        MockResponse::create(['baz' => 'qux']),
+    ],
+]);
+```
+
+### Adding Expectations
+
+When using faking responses, it's important to be able to check that a specific make request was sent and with the correct data, headers, and config. `MockClient` & `ScopingMockClient` provide you with various ways to add expectations to your tests.
+
+#### Available Expectations
+- `assertSent`
+- `assetNotSend`
+- `assertNothingSent`
+- `assertSentCount`
+
+The `assertSent` / `assertNotSent` are the two most powerful expectation methods. They can accept a URL pattern or even a closure where you define if a request/response is what you expect.
+
+```php
+use Jenky\Atlas\Mock\MockClient;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
+
+$client = new MockClient();
+
+$request = $requestFactory->createRequest('GET', 'http://example.com/users/1');
+$client->sendRequest($request);
+
+$client->assertSent('users/*');
+
+$client->assertSent(function (RequestInterface $request, ResponseInterface $response): bool {
+    return $request->getMethod() === 'GET'
+        && (string) $request->getUri() === 'http://example.com/users/1'
+        && $response->getStatusCode() === 200;
+});
 ```
 
 ## Testing
