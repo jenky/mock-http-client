@@ -18,6 +18,7 @@
     ],
     "require": {
         "php": "^7.2.5|^8.0",
+        "php-http/discovery": "^1.14",
         "psr/http-client": "^1.0",
         "psr/http-factory": "^1.0"
     },
@@ -62,7 +63,10 @@
         }
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true

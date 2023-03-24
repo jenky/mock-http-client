@@ -4,33 +4,39 @@ declare(strict_types=1);
 
 namespace Jenky\Atlas\Tests;
 
+use Http\Discovery\Psr17FactoryDiscovery;
 use Jenky\Atlas\Mock\MockClient;
 use Jenky\Atlas\Mock\MockResponse;
 use Jenky\Atlas\Mock\ScopingMockClient;
 use Jenky\Atlas\Mock\Uri;
-use Nyholm\Psr7\Factory\Psr17Factory;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
 
 final class MockTest extends TestCase
 {
     /**
-     * @var \Psr\Http\Message\factoryInterface
+     * @var \Psr\Http\Message\RequestFactoryInterface
      */
-    private $factory;
+    private $requestFactory;
+
+    /**
+     * @var \Psr\Http\Message\ResponseFactoryInterface
+     */
+    private $responseFactory;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->factory = new Psr17Factory();
+        $this->requestFactory = Psr17FactoryDiscovery::findRequestFactory();
+        $this->responseFactory = Psr17FactoryDiscovery::findResponseFactory();
     }
 
     public function test_fake_default_response(): void
     {
         $client = new MockClient();
 
-        $request = $this->factory->createRequest('GET', 'https://example.com');
+        $request = $this->requestFactory->createRequest('GET', 'https://example.com');
 
         $response = $client->sendRequest($request);
 
@@ -39,9 +45,9 @@ final class MockTest extends TestCase
 
     public function test_fake_failed_response(): void
     {
-        $client = new MockClient($this->factory->createResponse(500));
+        $client = new MockClient($this->responseFactory->createResponse(500));
 
-        $request = $this->factory->createRequest('GET', 'https://example.com');
+        $request = $this->requestFactory->createRequest('GET', 'https://example.com');
 
         $response = $client->sendRequest($request);
 
@@ -53,12 +59,12 @@ final class MockTest extends TestCase
         $client = new MockClient([
             MockResponse::create(['ok' => true]),
             MockResponse::create(['error' => 'Unauthenticated'], 401),
-            $this->factory->createResponse(502),
+            $this->responseFactory->createResponse(502),
         ]);
 
-        $request1 = $this->factory->createRequest('GET', 'https://example.com');
-        $request2 = $this->factory->createRequest('POST', 'https://github.com');
-        $request3 = $this->factory->createRequest('PUT', 'https://google.com');
+        $request1 = $this->requestFactory->createRequest('GET', 'https://example.com');
+        $request2 = $this->requestFactory->createRequest('POST', 'https://github.com');
+        $request3 = $this->requestFactory->createRequest('PUT', 'https://google.com');
 
         $response1 = $client->sendRequest($request1);
         $response2 = $client->sendRequest($request2);
@@ -87,10 +93,10 @@ final class MockTest extends TestCase
             '*' => MockResponse::create('', 200),
         ]);
 
-        $request = $this->factory->createRequest('GET', 'https://postman-echo.com/get');
+        $request = $this->requestFactory->createRequest('GET', 'https://postman-echo.com/get');
         $this->assertSame(200, $client->sendRequest($request)->getStatusCode());
 
-        $request = $this->factory->createRequest('GET', 'https://postman-echo.com/cookies');
+        $request = $this->requestFactory->createRequest('GET', 'https://postman-echo.com/cookies');
         $this->assertSame(400, $client->sendRequest($request)->getStatusCode());
 
         $client->assertSent(function (RequestInterface $request): bool {
@@ -99,7 +105,7 @@ final class MockTest extends TestCase
 
         $client->assertNotSent('/users/*');
 
-        $request = $this->factory->createRequest('GET', 'jsonplaceholder.typicode.com/users/1');
+        $request = $this->requestFactory->createRequest('GET', 'jsonplaceholder.typicode.com/users/1');
         $response = $client->sendRequest($request);
         $body = json_decode((string) $response->getBody(), true);
 
