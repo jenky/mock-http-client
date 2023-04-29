@@ -83,6 +83,7 @@ final class MockTest extends TestCase
         $client->assertSent('https://example.com');
         $client->assertSent('https://github.com');
         $client->assertSent('https://google.com');
+        $client->assertSentCount(3);
     }
 
     public function test_fake_conditional_responses(): void
@@ -109,6 +110,7 @@ final class MockTest extends TestCase
         $response = $client->sendRequest($request);
         $body = json_decode((string) $response->getBody(), true);
 
+        $this->assertSame('application/json', $response->getHeaderLine('Content-Type'));
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame('Leanne Graham', $body['name'] ?? '');
         $this->assertSame('Bret', $body['username'] ?? '');
