@@ -60,6 +60,23 @@ class MockResponse
      */
     public static function fixture(string $filename, int $status = 200, array $headers = []): ResponseInterface
     {
+        if (empty($headers['Content-Type'])) {
+            $extension = pathinfo($filename, PATHINFO_EXTENSION);
+
+            switch ($extension) {
+                case 'json':
+                    $headers['Content-Type'] = 'application/json';
+                    break;
+
+                case 'json':
+                    $headers['Content-Type'] = 'application/xml';
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
         return static::create(function (StreamFactoryInterface $factory) use ($filename) {
             return $factory->createStreamFromFile($filename);
         }, $status, $headers);
