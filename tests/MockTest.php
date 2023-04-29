@@ -110,9 +110,27 @@ final class MockTest extends TestCase
         $response = $client->sendRequest($request);
         $body = json_decode((string) $response->getBody(), true);
 
-        $this->assertSame('application/json', $response->getHeaderLine('Content-Type'));
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame('Leanne Graham', $body['name'] ?? '');
         $this->assertSame('Bret', $body['username'] ?? '');
+    }
+
+    public function test_fixture_response_content_type(): void
+    {
+        $client = new MockClient([
+            MockResponse::fixture(__DIR__.'/fixtures/user.json'),
+            MockResponse::fixture(__DIR__.'/fixtures/slideshow.xml'),
+        ]);
+
+        $client->assertNothingSent();
+
+        $request = $this->requestFactory->createRequest('GET', 'https://example.com/');
+        $response = $client->sendRequest($request);
+
+        $this->assertSame('application/json', $response->getHeaderLine('Content-Type'));
+
+        $response = $client->sendRequest($request);
+
+        $this->assertSame('application/xml', $response->getHeaderLine('Content-Type'));
     }
 }

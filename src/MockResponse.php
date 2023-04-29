@@ -68,7 +68,7 @@ class MockResponse
                     $headers['Content-Type'] = 'application/json';
                     break;
 
-                case 'json':
+                case 'xml':
                     $headers['Content-Type'] = 'application/xml';
                     break;
 
