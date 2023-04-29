@@ -21,6 +21,11 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Security
 - Nothing -->
 
+## [1.0.3](https://github.com/jenky/atlas-mock-client/compare/1.0.2...1.0.3) - 2023-04-29
+
+### Added
+- Add `Content-Type` header automatically based on fixture file extension
+
 ## [1.0.2](https://github.com/jenky/atlas-mock-client/compare/1.0.1...1.0.2) - 2023-03-24
 
 ### Added
