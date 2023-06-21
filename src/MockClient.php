@@ -14,7 +14,7 @@ class MockClient implements ClientInterface
     use AssertTrait;
 
     /**
-     * @var null|\Psr\Http\Message\ResponseInterface
+     * @var null|ResponseInterface
      */
     private $defaultResponse;
 
@@ -24,7 +24,7 @@ class MockClient implements ClientInterface
     private $responses;
 
     /**
-     * @param  null|iterable|callable[]|ResponseInterface|ResponseInterface[] $response
+     * @param  null|iterable<ResponseInterface>|ResponseInterface|ResponseInterface[] $response
      */
     public function __construct($response = null)
     {
@@ -42,7 +42,7 @@ class MockClient implements ClientInterface
     /**
      * Set the response factory.
      *
-     * @param  null|iterable|callable[]|ResponseInterface|ResponseInterface[] $response
+     * @param  null|iterable<ResponseInterface>|ResponseInterface|ResponseInterface[] $response
      */
     public function setResponse($response = null): void
     {

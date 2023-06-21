@@ -13,7 +13,7 @@ class ScopingMockClient implements ClientInterface
     use AssertTrait;
 
     /**
-     * @var null|iterable|\Psr\Http\Message\ResponseInterface|\Psr\Http\Message\ResponseInterface[]
+     * @var null|iterable<ResponseInterface>|ResponseInterface|ResponseInterface[]
      */
     private $defaultResponse = null;
 
@@ -21,6 +21,11 @@ class ScopingMockClient implements ClientInterface
      * @var array<string, mixed>
      */
     private $conditionalResponses = [];
+
+    /**
+     * @var array<string, ClientInterface>
+     */
+    private $cachedClients = [];
 
     public function __construct(iterable $responses)
     {
@@ -44,7 +49,7 @@ class ScopingMockClient implements ClientInterface
     /**
      * Add an response with a condition.
      *
-     * @param  iterable|\Psr\Http\Message\ResponseInterface|\Psr\Http\Message\ResponseInterface[] $response
+     * @param  iterable<ResponseInterface>|ResponseInterface|ResponseInterface[] $response
      */
     public function addResponse(string $condition, $response): void
     {
@@ -57,9 +62,9 @@ class ScopingMockClient implements ClientInterface
 
     public function sendRequest(RequestInterface $request): ResponseInterface
     {
-        foreach ($this->conditionalResponses as $uri => $responseFactory) {
-            if (Uri::matches($uri, (string) $request->getUri())) {
-                return $this->sendAndRecord($request, $responseFactory);
+        foreach ($this->conditionalResponses as $scope => $responseFactory) {
+            if (Uri::matches($scope, (string) $request->getUri())) {
+                return $this->sendAndRecord($request, $responseFactory, $scope);
             }
         }
 
@@ -67,15 +72,24 @@ class ScopingMockClient implements ClientInterface
     }
 
     /**
-     * @param  null|iterable|\Psr\Http\Message\ResponseInterface|\Psr\Http\Message\ResponseInterface[] $response
+     * @param  null|iterable<ResponseInterface>|ResponseInterface|ResponseInterface[] $responseFactory
      *
      * @throws \OutOfRangeException
      * @throws \InvalidArgumentException
      */
-    private function sendAndRecord(RequestInterface $request, $response): ResponseInterface
+    private function sendAndRecord(RequestInterface $request, $responseFactory, ?string $scope = null): ResponseInterface
     {
-        $response = $this->createMockClient($response)
-            ->sendRequest($request);
+        if (is_null($scope)) {
+            $client = $this->createMockClient($responseFactory);
+        } else {
+            if (empty($this->cachedClients[$scope])) {
+                $this->cachedClients[$scope] = $this->createMockClient($responseFactory);
+            }
+
+            $client = $this->cachedClients[$scope];
+        }
+
+        $response = $client->sendRequest($request);
 
         $this->record($request, $response);
 
@@ -85,7 +99,7 @@ class ScopingMockClient implements ClientInterface
     /**
      * Create a mock client.
      *
-     * @param  null|iterable|\Psr\Http\Message\ResponseInterface|\Psr\Http\Message\ResponseInterface[] $response
+     * @param  null|iterable<ResponseInterface>|ResponseInterface|ResponseInterface[] $response
      */
     private function createMockClient($response): MockClient
     {
