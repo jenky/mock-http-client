@@ -20,23 +20,34 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Security
 - Nothing -->
+## 1.0.5 - 2023-06-21
+
+### Fixed
+
+- Fix sequential issue with `ScopingMockClient`
+
+**Full Changelog**: https://github.com/jenky/atlas-mock-client/compare/1.0.4...1.0.5
 
 ## [1.0.4](https://github.com/jenky/atlas-mock-client/compare/1.0.3...1.0.4) - 2023-04-29
 
 ### Fixed
+
 - Fix `Content-Type` header for `xml` file.
 
 ## [1.0.3](https://github.com/jenky/atlas-mock-client/compare/1.0.2...1.0.3) - 2023-04-29
 
 ### Added
+
 - Add `Content-Type` header automatically based on fixture file extension.
 
 ## [1.0.2](https://github.com/jenky/atlas-mock-client/compare/1.0.1...1.0.2) - 2023-03-24
 
 ### Added
+
 - Add missing dependency: `php-http/discovery`.
 
 ## [1.0.1](https://github.com/jenky/atlas-mock-client/compare/1.0.0...1.0.1) - 2023-03-24
 
 ### Fixed
+
 - Rerelease.
