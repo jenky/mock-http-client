@@ -55,8 +55,10 @@ If you have fixture data and don't want to create response manually, you can als
 ```php
 use Jenky\Atlas\Mock\MockResponse;
 
-MockResponse::fixture(__DIR__.'/fixtures/user.json', 200, ['Content-Type' => 'application/json']);
+MockResponse::fixture(__DIR__.'/fixtures/user.json');
 ```
+
+> If your fixture is a JSON or XML file, there's no need to add the `Content-Type` header manually.
 
 #### Faking Response Sequences
 
@@ -120,7 +122,7 @@ new ScopingMockClient([
 
 ### Adding Expectations
 
-When using faking responses, it's important to be able to check that a specific make request was sent and with the correct data, headers, and config. `MockClient` & `ScopingMockClient` provide you with various ways to add expectations to your tests.
+When using faking responses, it's important to be able to check that a specific make request was sent and with the correct data, and headers. `MockClient` & `ScopingMockClient` provide you with various ways to add expectations to your tests.
 
 #### Available Expectations
 - `assertSent`

@@ -11,7 +11,7 @@ use Psr\Http\Message\ResponseInterface;
 trait AssertTrait
 {
     /**
-     * @var array<int, array>
+     * @var array<int, array{RequestInterface, ResponseInterface}>
      */
     private $recorded = [];
 
@@ -40,7 +40,7 @@ trait AssertTrait
     /**
      * Determine wether request was sent.
      *
-     * @param  string|callable $condition
+     * @param  string|callable(RequestInterface, ResponseInterface): bool $condition
      */
     protected function checkRequestWasSent($condition): bool
     {
@@ -58,7 +58,9 @@ trait AssertTrait
     }
 
     /**
-     * @param  string|callable $condition
+     * Assert that a given request was sent.
+     *
+     * @param  string|callable(RequestInterface, ResponseInterface): bool $condition
      *
      * @throws \PHPUnit\Framework\ExpectationFailedException
      */
@@ -68,7 +70,9 @@ trait AssertTrait
     }
 
     /**
-     * @param  string|callable $condition
+     * Assert that a given request was not sent.
+     *
+     * @param  string|callable(RequestInterface, ResponseInterface): bool $condition
      *
      * @throws \PHPUnit\Framework\ExpectationFailedException
      */
@@ -77,11 +81,21 @@ trait AssertTrait
         Assert::assertFalse($this->checkRequestWasSent($condition), $message);
     }
 
+    /**
+     * Assert that nothing was sent.
+     *
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     */
     public function assertNothingSent(string $message = ''): void
     {
         Assert::assertEmpty($this->recorded, $message);
     }
 
+    /**
+     * Assert a request count has been met.
+     *
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     */
     public function assertSentCount(int $count, string $message = ''): void
     {
         Assert::assertCount($count, $this->recorded, $message);
