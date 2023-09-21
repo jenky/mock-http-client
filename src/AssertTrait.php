@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Jenky\Atlas\Mock;
+namespace Fansipan\Mock;
 
 use PHPUnit\Framework\Assert;
 use Psr\Http\Message\RequestInterface;

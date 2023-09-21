@@ -1,18 +1,17 @@
 {
-    "name": "jenky/atlas-mock-client",
+    "name": "fansipan/mock-client",
     "description": "PSR-18 Mock HTTP Client",
     "keywords": [
-        "jenky",
-        "atlas",
+        "fansipan",
         "http-client",
         "mock-http-client"
     ],
-    "homepage": "https://github.com/jenky/atlas-mock-client",
+    "homepage": "https://github.com/phanxipang/mock-client",
     "license": "MIT",
     "authors": [
         {
             "name": "Lynh",
-            "email": "author@domain.com",
+            "email": "contact@lynh.me",
             "role": "Developer"
         }
     ],
@@ -33,12 +32,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Jenky\\Atlas\\Mock\\": "src"
+            "Fansipan\\Mock\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Jenky\\Atlas\\Mock\\Tests\\": "tests"
+            "Fansipan\\Mock\\Tests\\": "tests"
         }
     },
     "scripts": {
