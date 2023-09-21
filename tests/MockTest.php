@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Fansipan\Tests;
 
-use Http\Discovery\Psr17FactoryDiscovery;
 use Fansipan\Mock\MockClient;
 use Fansipan\Mock\MockResponse;
 use Fansipan\Mock\ScopingMockClient;
 use Fansipan\Mock\Uri;
+use Http\Discovery\Psr17FactoryDiscovery;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
 
