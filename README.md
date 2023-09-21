@@ -23,7 +23,7 @@ composer require jenky/atlas-mock-client
 ### Creating Mock Client
 
 ```php
-use Jenky\Atlas\Mock\MockClient;
+use Fansipan\Mock\MockClient;
 
 $client = new MockClient();
 $response = $client->sendRequest($request);
@@ -32,8 +32,8 @@ $response = $client->sendRequest($request);
 By default `MockClient` will always return `200 - OK` status code with empty body. If you want to return a different response, create a `Psr\Http\Message\ResponseInterface` instance and pass it as constructor argument. You can use `MockResponse` to quickly create a fake response.
 
 ```php
-use Jenky\Atlas\Mock\MockClient;
-use Jenky\Atlas\Mock\MockResponse;
+use Fansipan\Mock\MockClient;
+use Fansipan\Mock\MockResponse;
 
 $client = new MockClient(MockResponse::create('', 500));
 ```
@@ -43,7 +43,7 @@ $client = new MockClient(MockResponse::create('', 500));
 The `MockResponse` class is used to create fake responses. It can accept a body, status, and headers. These properties will be populated in the fake response. The response body accepts an array for a JSON body or plain strings to simulate other responses, like XML.
 
 ```php
-use Jenky\Atlas\Mock\MockResponse;
+use Fansipan\Mock\MockResponse;
 
 MockResponse::create(['name' => 'John', 'age' => 30], 201, ['X-Custom-Header' => 'foo']);
 ```
@@ -53,7 +53,7 @@ MockResponse::create(['name' => 'John', 'age' => 30], 201, ['X-Custom-Header' =>
 If you have fixture data and don't want to create response manually, you can also use `fixture` method to create a response.
 
 ```php
-use Jenky\Atlas\Mock\MockResponse;
+use Fansipan\Mock\MockResponse;
 
 MockResponse::fixture(__DIR__.'/fixtures/user.json');
 ```
@@ -65,8 +65,8 @@ MockResponse::fixture(__DIR__.'/fixtures/user.json');
 Sequence faking allows you to define a number of fake responses in a specific order. It will pull out the next response in the sequence, removing it from the sequence. Each response can only be consumed once. When all the responses in a response sequence have been consumed, any further requests will cause the response sequence to throw an exception.
 
 ```php
-use Jenky\Atlas\Mock\MockClient;
-use Jenky\Atlas\Mock\MockResponse;
+use Fansipan\Mock\MockClient;
+use Fansipan\Mock\MockResponse;
 
 $client = new MockClient([
     MockResponse::make(['name' => 'foo'], 200),
@@ -84,8 +84,8 @@ Alternatively, you may use `ScopingMockClient` and pass an array to the construc
 
 
 ```php
-use Jenky\Atlas\Mock\MockResponse;
-use Jenky\Atlas\Mock\ScopingMockClient;
+use Fansipan\Mock\MockResponse;
+use Fansipan\Mock\ScopingMockClient;
 
 new ScopingMockClient([
     // Stub a JSON response for GitHub endpoints...
@@ -102,8 +102,8 @@ new ScopingMockClient([
 [Sequence Faking](#faking-response-sequences) also works with `ScopingMockClient`
 
 ```php
-use Jenky\Atlas\Mock\MockResponse;
-use Jenky\Atlas\Mock\ScopingMockClient;
+use Fansipan\Mock\MockResponse;
+use Fansipan\Mock\ScopingMockClient;
 
 new ScopingMockClient([
     // Stub sequence JSON responses for GitHub endpoints...
@@ -133,7 +133,7 @@ When using faking responses, it's important to be able to check that a specific 
 The `assertSent` / `assertNotSent` are the two most powerful expectation methods. They can accept a URL pattern or even a closure where you define if a request/response is what you expect.
 
 ```php
-use Jenky\Atlas\Mock\MockClient;
+use Fansipan\Mock\MockClient;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 

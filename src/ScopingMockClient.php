@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Jenky\Atlas\Mock;
+namespace Fansipan\Mock;
 
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
