@@ -15,7 +15,7 @@ The `MockClient` accepts `Psr\Http\Message\ResponseInterface` which when used on
 You can install the package via composer:
 
 ```bash
-composer require jenky/atlas-mock-client
+composer require fansipan/mock-client
 ```
 
 ## Usage
@@ -178,20 +178,20 @@ If you discover any security related issues, please email jenky.w0w@gmail.com in
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/jenky/atlas-mock-client.svg?style=for-the-badge
+[ico-version]: https://img.shields.io/packagist/v/phansipang/mock-client.svg?style=for-the-badge
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=for-the-badge
-[ico-travis]: https://img.shields.io/travis/jenky/atlas-mock-client/master.svg?style=for-the-badge
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/jenky/atlas-mock-client.svg?style=for-the-badge
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/jenky/atlas-mock-client.svg?style=for-the-badge
-[ico-gh-actions]: https://img.shields.io/github/actions/workflow/status/jenky/atlas-mock-client/testing.yml?branch=main&label=actions&logo=github&style=for-the-badge
-[ico-codecov]: https://img.shields.io/codecov/c/github/jenky/atlas-mock-client?logo=codecov&style=for-the-badge
-[ico-downloads]: https://img.shields.io/packagist/dt/jenky/atlas-mock-client.svg?style=for-the-badge
+[ico-travis]: https://img.shields.io/travis/phansipang/mock-client/master.svg?style=for-the-badge
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/phansipang/mock-client.svg?style=for-the-badge
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/phansipang/mock-client.svg?style=for-the-badge
+[ico-gh-actions]: https://img.shields.io/github/actions/workflow/status/phansipang/mock-client/testing.yml?branch=main&label=actions&logo=github&style=for-the-badge
+[ico-codecov]: https://img.shields.io/codecov/c/github/phansipang/mock-client?logo=codecov&style=for-the-badge
+[ico-downloads]: https://img.shields.io/packagist/dt/phansipang/mock-client.svg?style=for-the-badge
 
-[link-packagist]: https://packagist.org/packages/jenky/atlas-mock-client
-[link-travis]: https://travis-ci.org/jenky/atlas-mock-client
-[link-scrutinizer]: https://scrutinizer-ci.com/g/jenky/atlas-mock-client/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/jenky/atlas-mock-client
-[link-gh-actions]: https://github.com/jenky/jenky/atlas-mock-client
-[link-codecov]: https://codecov.io/gh/jenky/atlas-mock-client
-[link-downloads]: https://packagist.org/packages/jenky/atlas-mock-client
+[link-packagist]: https://packagist.org/packages/phansipang/mock-client
+[link-travis]: https://travis-ci.org/phansipang/mock-client
+[link-scrutinizer]: https://scrutinizer-ci.com/g/phansipang/mock-client/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/phansipang/mock-client
+[link-gh-actions]: https://github.com/jenky/phansipang/mock-client
+[link-codecov]: https://codecov.io/gh/phansipang/mock-client
+[link-downloads]: https://packagist.org/packages/phansipang/mock-client
 
