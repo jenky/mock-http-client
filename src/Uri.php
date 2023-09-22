@@ -13,11 +13,11 @@ final class Uri
      */
     public static function matches($pattern, string $value): bool
     {
-        $quoted = preg_quote('*', '/');
+        $quoted = \preg_quote('*', '/');
 
-        $pattern = '*'.preg_replace('/^(?:'.$quoted.')+/u', '', $pattern); // @phpstan-ignore-line
+        $pattern = '*'.\preg_replace('/^(?:'.$quoted.')+/u', '', $pattern); // @phpstan-ignore-line
 
-        if (! is_iterable($pattern)) {
+        if (! \is_iterable($pattern)) {
             $pattern = [$pattern];
         }
 
@@ -31,14 +31,14 @@ final class Uri
                 return true;
             }
 
-            $pattern = preg_quote($pattern, '#');
+            $pattern = \preg_quote($pattern, '#');
 
             // Asterisks are translated into zero-or-more regular expression wildcards
             // to make it convenient to check if the strings starts with the given
             // pattern such as "library/*", making any string check convenient.
-            $pattern = str_replace('\*', '.*', $pattern);
+            $pattern = \str_replace('\*', '.*', $pattern);
 
-            if (preg_match('#^'.$pattern.'\z#u', $value) === 1) {
+            if (\preg_match('#^'.$pattern.'\z#u', $value) === 1) {
                 return true;
             }
         }

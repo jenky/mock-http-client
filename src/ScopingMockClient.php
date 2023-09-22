@@ -38,7 +38,7 @@ class ScopingMockClient implements ClientInterface
     public function setResponses(iterable $responses): void
     {
         foreach ($responses as $key => $response) {
-            if (! is_string($key)) {
+            if (! \is_string($key)) {
                 continue;
             }
 
@@ -79,7 +79,7 @@ class ScopingMockClient implements ClientInterface
      */
     private function sendAndRecord(RequestInterface $request, $responseFactory, ?string $scope = null): ResponseInterface
     {
-        if (is_null($scope)) {
+        if (\is_null($scope)) {
             $client = $this->createMockClient($responseFactory);
         } else {
             if (empty($this->cachedClients[$scope])) {

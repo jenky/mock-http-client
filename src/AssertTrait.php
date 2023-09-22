@@ -32,7 +32,7 @@ trait AssertTrait
             return $this->recorded;
         }
 
-        return array_filter($this->recorded, function ($record) use ($callback) {
+        return \array_filter($this->recorded, function ($record) use ($callback) {
             return (bool) $callback(...$record);
         });
     }
@@ -48,13 +48,13 @@ trait AssertTrait
             return false;
         }
 
-        $callback = is_callable($condition)
+        $callback = \is_callable($condition)
             ? $condition
             : function (RequestInterface $request, ResponseInterface $response) use ($condition): bool {
                 return Uri::matches((string) $condition, (string) $request->getUri());
             };
 
-        return count($this->recorded($callback)) > 0;
+        return \count($this->recorded($callback)) > 0;
     }
 
     /**

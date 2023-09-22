@@ -33,17 +33,17 @@ class MockResponse
             return $response->withBody($body);
         }
 
-        if (is_array($body)) {
-            $body = json_encode($body) ?: '';
+        if (\is_array($body)) {
+            $body = \json_encode($body) ?: '';
 
             if (! $response->hasHeader('Content-Type')) {
                 $response = $response->withHeader('Content-Type', 'application/json');
             }
         }
 
-        if (! is_callable($body)) {
+        if (! \is_callable($body)) {
             $body = function (StreamFactoryInterface $factory) use ($body) {
-                return is_resource($body)
+                return \is_resource($body)
                     ? $factory->createStreamFromResource($body)
                     : $factory->createStream($body);
             };
@@ -61,7 +61,7 @@ class MockResponse
     public static function fixture(string $filename, int $status = 200, array $headers = []): ResponseInterface
     {
         if (empty($headers['Content-Type'])) {
-            $extension = pathinfo($filename, PATHINFO_EXTENSION);
+            $extension = \pathinfo($filename, PATHINFO_EXTENSION);
 
             switch ($extension) {
                 case 'json':

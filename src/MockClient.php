@@ -46,7 +46,7 @@ class MockClient implements ClientInterface
      */
     public function setResponse($response = null): void
     {
-        if (is_null($response)) {
+        if (\is_null($response)) {
             $response = Psr17FactoryDiscovery::findResponseFactory()->createResponse();
         }
 
@@ -55,7 +55,7 @@ class MockClient implements ClientInterface
             return;
         }
 
-        if (is_array($response)) {
+        if (\is_array($response)) {
             $response = new \ArrayIterator($response);
         }
 
@@ -82,7 +82,7 @@ class MockClient implements ClientInterface
         }
 
         $responseFactory = $this->responses->current();
-        $response = is_callable($responseFactory) ? $responseFactory($method, $uri) : $responseFactory;
+        $response = \is_callable($responseFactory) ? $responseFactory($method, $uri) : $responseFactory;
         $this->responses->next();
 
         if (! $response instanceof ResponseInterface) {
