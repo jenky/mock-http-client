@@ -1,4 +1,4 @@
-# Atlas Mock HTTP Client
+# Fansipan Mock HTTP Client
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Github Actions][ico-gh-actions]][link-gh-actions]
@@ -6,7 +6,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 [![Software License][ico-license]](LICENSE.md)
 
-Atlas mock HTTP client is [PSR-18 Client](https://www.php-fig.org/psr/psr-18/) implementation that provides ability send test requests with fake responses.
+Fansipan mock HTTP client is [PSR-18 Client](https://www.php-fig.org/psr/psr-18/) implementation that provides ability send test requests with fake responses.
 
 The `MockClient` accepts `Psr\Http\Message\ResponseInterface` which when used on a request, will respond with a fake response without actually sending a real request to the web. This helps speed up tests massively and can help you test your application for different API response scenarios, like a 404 error or 500 error.
 
@@ -178,20 +178,14 @@ If you discover any security related issues, please email jenky.w0w@gmail.com in
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/phansipang/mock-client.svg?style=for-the-badge
+[ico-version]: https://img.shields.io/packagist/v/fansipan/mock-client.svg?style=for-the-badge
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=for-the-badge
-[ico-travis]: https://img.shields.io/travis/phansipang/mock-client/master.svg?style=for-the-badge
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/phansipang/mock-client.svg?style=for-the-badge
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/phansipang/mock-client.svg?style=for-the-badge
-[ico-gh-actions]: https://img.shields.io/github/actions/workflow/status/phansipang/mock-client/testing.yml?branch=main&label=actions&logo=github&style=for-the-badge
-[ico-codecov]: https://img.shields.io/codecov/c/github/phansipang/mock-client?logo=codecov&style=for-the-badge
-[ico-downloads]: https://img.shields.io/packagist/dt/phansipang/mock-client.svg?style=for-the-badge
+[ico-gh-actions]: https://img.shields.io/github/actions/workflow/status/phanxipang/mock-client/testing.yml?branch=main&label=actions&logo=github&style=for-the-badge
+[ico-codecov]: https://img.shields.io/codecov/c/github/phanxipang/mock-client?logo=codecov&style=for-the-badge
+[ico-downloads]: https://img.shields.io/packagist/dt/fansipan/mock-client.svg?style=for-the-badge
 
-[link-packagist]: https://packagist.org/packages/phansipang/mock-client
-[link-travis]: https://travis-ci.org/phansipang/mock-client
-[link-scrutinizer]: https://scrutinizer-ci.com/g/phansipang/mock-client/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/phansipang/mock-client
-[link-gh-actions]: https://github.com/jenky/phansipang/mock-client
-[link-codecov]: https://codecov.io/gh/phansipang/mock-client
-[link-downloads]: https://packagist.org/packages/phansipang/mock-client
+[link-packagist]: https://packagist.org/packages/fansipan/mock-client
+[link-gh-actions]: https://github.com/jenky/phanxipang/mock-client
+[link-codecov]: https://codecov.io/gh/phanxipang/mock-client
+[link-downloads]: https://packagist.org/packages/fansipan/mock-client
 
