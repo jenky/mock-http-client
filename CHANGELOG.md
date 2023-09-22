@@ -20,6 +20,18 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Security
 - Nothing -->
+## 1.1.0 - 2023-09-22
+
+### What's Changed
+
+- Moving to org by @jenky in https://github.com/phanxipang/mock-client/pull/1
+
+### New Contributors
+
+- @jenky made their first contribution in https://github.com/phanxipang/mock-client/pull/1
+
+**Full Changelog**: https://github.com/phanxipang/mock-client/compare/1.0.5...1.1.0
+
 ## 1.0.5 - 2023-06-21
 
 ### Fixed
