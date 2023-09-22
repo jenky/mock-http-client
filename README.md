@@ -185,7 +185,7 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [ico-downloads]: https://img.shields.io/packagist/dt/fansipan/mock-client.svg?style=for-the-badge
 
 [link-packagist]: https://packagist.org/packages/fansipan/mock-client
-[link-gh-actions]: https://github.com/jenky/phanxipang/mock-client
+[link-gh-actions]: https://github.com/jenky/phanxipang/mock-client/actions
 [link-codecov]: https://codecov.io/gh/phanxipang/mock-client
 [link-downloads]: https://packagist.org/packages/fansipan/mock-client
 
