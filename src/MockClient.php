@@ -32,14 +32,6 @@ class MockClient implements ClientInterface
     }
 
     /**
-     * Determine whether request is sequential.
-     */
-    private function isSequential(): bool
-    {
-        return ! $this->defaultResponse instanceof ResponseInterface;
-    }
-
-    /**
      * Set the response factory.
      *
      * @param  null|iterable<ResponseInterface>|ResponseInterface|ResponseInterface[] $response
@@ -68,10 +60,10 @@ class MockClient implements ClientInterface
 
     public function sendRequest(RequestInterface $request): ResponseInterface
     {
-        if (! $this->isSequential()) {
+        if ($this->defaultResponse instanceof ResponseInterface) {
             $this->record($request, $this->defaultResponse);
 
-            return $this->defaultResponse;
+            return $this->defaultResponse; // @phpstan-ignore return.type
         }
 
         $method = $request->getMethod();
