@@ -20,6 +20,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Security
 - Nothing -->
+## 1.1.1 - 2024-08-29
+
+**Full Changelog**: https://github.com/phanxipang/mock-client/compare/1.1.0...1.1.1
+
 ## 1.1.0 - 2023-09-22
 
 ### What's Changed
