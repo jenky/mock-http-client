@@ -6,8 +6,12 @@ namespace Fansipan\Tests;
 
 use Fansipan\Mock\MockClient;
 use Fansipan\Mock\MockResponse;
+use Fansipan\Mock\RequestMatcher;
 use Fansipan\Mock\ScopingMockClient;
 use Fansipan\Mock\Uri;
+use Fansipan\RequestMatcher\ChainRequestMatcher;
+use Fansipan\RequestMatcher\HostRequestMatcher;
+use Fansipan\RequestMatcher\SchemeRequestMatcher;
 use Http\Discovery\Psr17FactoryDiscovery;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
@@ -132,5 +136,22 @@ final class MockTest extends TestCase
         $response = $client->sendRequest($request);
 
         $this->assertSame('application/xml', $response->getHeaderLine('Content-Type'));
+    }
+
+    public function test_request_matcher(): void
+    {
+        $client = new MockClient();
+
+        $request = $this->requestFactory->createRequest('GET', 'https://example.com/');
+        $client->sendRequest($request);
+
+        $client->assertSent(new RequestMatcher(
+            new ChainRequestMatcher([
+                new SchemeRequestMatcher('https'),
+                new HostRequestMatcher('example.com'),
+            ])
+        ));
+
+        $client->assertSentCount(1);
     }
 }
