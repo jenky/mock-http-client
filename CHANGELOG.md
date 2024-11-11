@@ -20,6 +20,16 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Security
 - Nothing -->
+## 1.2.0 - 2024-11-11
+
+### What's Changed
+
+#### Added
+
+* Request matcher by @jenky in https://github.com/phanxipang/mock-client/pull/2
+
+**Full Changelog**: https://github.com/phanxipang/mock-client/compare/1.1.1...1.2.0
+
 ## 1.1.1 - 2024-08-29
 
 **Full Changelog**: https://github.com/phanxipang/mock-client/compare/1.1.0...1.1.1
