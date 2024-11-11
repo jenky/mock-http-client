@@ -60,6 +60,9 @@
             "@test"
         ]
     },
+    "suggest": {
+        "fansipan/request-matcher": "Provides a reusable request matcher for assertions."
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.x-dev"
